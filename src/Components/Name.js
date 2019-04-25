@@ -1,43 +1,17 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 class Name extends Component {
     state= {
         firstName:'',
         lastName:'',
-        descriptor:''
+        descriptor:'',
+        class: ''
     }
 
-    getFirstName = async () => {
-            console.log('first name')
-            let res = await axios.get('/first')
-            const {first_name} = res.data[0]
-            this.setState({
-                firstName: first_name
-            })            
-        
-    }
 
-    getLastName = async () => {
-        try{
-            console.log('last name')
-            let res = await axios.get('/last')
-            const {last_name} = res.data[0]
-            this.setState({
-                lastName: last_name
-            })
-        } catch(err) {
-            console.log(err)
-        }
-    }
-
-    getDescriptor = async () => {
-        let res = await axios.get('/descriptor')
-        const {descriptor} = res.data[0]
-        this.setState({
-            descriptor: 'the ' + descriptor
-        })
-    }
+    
 
     reset = () => {
         this.setState({
@@ -47,19 +21,40 @@ class Name extends Component {
         })
     }
 
-    render() {
+    
+    classMaker  = async () => {
+        let res = await axios.get('/class')
+        this.setState({
+            class: res.data
+        })
+    }
+    
+    handleButtons = async (value) => {
+        console.log(value)
+        let res = await axios.get(`/${value}`)
+        console.log(res.data)
+        this.setState({
+            [value]: res.data
+        })
+    }
+    
+    render() {     
+        console.log(this.props.match)
+        console.log(this.state)
         return (
             <>
+                <div>{this.state.class}</div>
                 <div>{this.state.firstName}</div>
                 <div>{this.state.lastName}</div>
-                <div>{this.state.descriptor}</div>                
-                <button onClick={this.getFirstName}>First Name</button>
-                <button onClick={this.getLastName}>Last Name</button>
-                <button onClick={this.getDescriptor}>Add Something</button>
+                <div>{"the" + this.state.descriptor}</div>      
+                <button onClick={this.classMaker}>Get a Class</button>
+                <button onClick={(e => {this.handleButtons(e.target.value)})} value="firstName">First Name</button>
+                <button onClick={(e => {this.handleButtons(e.target.value)})} value="lastName">Last Name</button>
+                <button onClick={(e => {this.handleButtons(e.target.value)})} value="descriptor">Add Something</button>
                 <button onClick={this.reset}>Clear Form</button>
                 
             </>
         )
     }
 }
-export default Name
+export default withRouter(Name)
