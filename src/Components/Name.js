@@ -30,7 +30,7 @@ class Name extends Component {
     }
     
     handleButtons = async (value) => {
-        console.log(value)
+        console.log(111, value)
         let res = await axios.get(`/${value}`)
         console.log(res.data)
         this.setState({
@@ -54,6 +54,7 @@ class Name extends Component {
                 <button onClick={this.reset}>Clear Form</button>
                 
             </>
+    
         )
     }
 }
