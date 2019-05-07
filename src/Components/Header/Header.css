@@ -1,0 +1,18 @@
+/* @font-face {font-family: fantasy; src: url('../../fonts/DUNGRG_.TTF')} */
+@font-face {font-family: dnd; src: url('../../fonts/DUNGRG.ttf')}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+}
+.LogoImage {
+  width: 50%;
+
+}
+
+.Title {
+  font-family: dnd;
+}

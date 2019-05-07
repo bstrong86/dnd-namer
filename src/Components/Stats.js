@@ -15,7 +15,7 @@ export default function Stats(){
 
   function randomNumber(){
     let newStat = 0
-    newStat = Math.floor(Math.random()*(18-0) + 0)
+    newStat = Math.floor(Math.random()*(18-4) + 4)
     console.log(newStat)
     return newStat
   }
@@ -31,13 +31,13 @@ export default function Stats(){
 
   return (
     <>
-      <button onClick={rollStats}>Strength:{strength}</button>
+      <div>Strength:{strength}</div>
       <div>Constitution:{constitution}</div>
       <div>Dexterity:{dexterity}</div>
       <div>Intelligence:{intelligence}</div>
       <div>Wisdom:{wisdom}</div>
       <div>Charisma:{charisma}</div>
-      <button onClick={rollStats}>Stats</button>
+      <button onClick={rollStats}>Roll Stats</button>
 
     </>
   )
